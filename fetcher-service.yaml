@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: fetcher
+  name: fetcher
+spec:
+  clusterIP: None
+  ports:
+  - name: "24444"
+    port: 24444
+    targetPort: 24444
+  selector:
+    app: fetcher
+status:
+  loadBalancer: {}

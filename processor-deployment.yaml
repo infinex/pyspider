@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: processor
+  name: processor
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: processor
+    spec:
+      containers:
+      - args:
+        - -c 
+        - /mnt/config.json 
+        - processor
+        image: infinex/pyspider:latest
+        name: processor
+        resources: {}
+        volumeMounts:
+        - name: "config"
+          mountPath: "/mnt/config.json"
+          subPath: "config.json"
+      restartPolicy: Always
+      volumes:
+        - name: "config"
+          configMap:
+            name: "config"
+status: {}

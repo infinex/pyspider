@@ -1,0 +1,12 @@
+{
+  "taskdb": "mysql+taskdb://root:password@mysql:3306/taskdb",
+  "projectdb": "mysql+projectdb://root:password@mysql:3306/projectdb",
+  "resultdb": "mysql+resultdb://root:password@mysql:3306/resultdb",
+  "message_queue": "amqp://guest:guest@rabbitmq:5672/%2F",
+  "webui": {
+    "username": "guest",
+    "password": "guest",
+    "need-auth": true,
+    "port":5000
+  }
+}

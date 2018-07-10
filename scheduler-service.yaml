@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: scheduler
+  name: scheduler
+spec:
+  clusterIP: None
+  ports:
+  - name: "23333"
+    port: 23333
+    targetPort: 23333
+  selector:
+    app: scheduler
+status:
+  loadBalancer: {}

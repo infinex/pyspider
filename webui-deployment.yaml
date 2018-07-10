@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: webui
+  name: webui
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: webui
+    spec:
+      containers:
+      - args:
+        - -c 
+        - /mnt/config.json 
+        - webui
+        - --scheduler-rpc 
+        - http://scheduler:23333
+        - --fetcher-rpc 
+        - http://fetcher:24444
+        image: infinex/pyspider:latest
+        name: webui
+        ports:
+        - containerPort: 5000
+        resources: {}
+        volumeMounts:
+        - name: "config"
+          mountPath: "/mnt/config.json"
+          subPath: "config.json"
+      restartPolicy: Always
+      volumes:
+        - name: "config"
+          configMap:
+            name: "config"
+status: {}

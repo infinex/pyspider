@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: phantomjs
+  name: phantomjs
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: phantomjs
+    spec:
+      containers:
+      - args:
+        - -c 
+        - /mnt/config.json 
+        - phantomjs
+        image: infinex/pyspider:latest
+        name: phantomjs
+        ports:
+        - containerPort: 25555
+        resources: {}
+        volumeMounts:
+        - name: "config"
+          mountPath: "/mnt/config.json"
+          subPath: "config.json"
+      restartPolicy: Always
+      volumes:
+        - name: "config"
+          configMap:
+            name: "config"
+status: {}

@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: scheduler
+  name: scheduler
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: scheduler
+    spec:
+      containers:
+      - args:
+        - -c 
+        - /mnt/config.json 
+        - scheduler
+        image: infinex/pyspider:latest
+        name: scheduler
+        ports:
+        - containerPort: 23333
+        resources: {}
+        volumeMounts:
+        - name: "config"
+          mountPath: "/mnt/config.json"
+          subPath: "config.json"
+      restartPolicy: Always
+      volumes:
+        - name: "config"
+          configMap:
+            name: "config"
+status: {}
